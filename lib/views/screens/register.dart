@@ -108,7 +108,7 @@ class SignUpScreen extends StatelessWidget {
                                 child: IconButton(
                                   onPressed: () {
                                     registerInfoController.isExpert = false;
-                                    Get.to(ContinueSignUpScreen());
+                                    Get.to(() => ContinueSignUpScreen());
                                   },
                                   icon: SvgPicture.asset(
                                       'assets/images/user.svg'),
@@ -134,7 +134,7 @@ class SignUpScreen extends StatelessWidget {
                                 child: IconButton(
                                   onPressed: () {
                                     registerInfoController.isExpert = true;
-                                    Get.to(ContinueSignUpScreen());
+                                    Get.to(() => ContinueSignUpScreen());
                                   },
                                   icon: SvgPicture.asset(
                                       'assets/images/sp-list.svg'),
@@ -166,7 +166,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           TextButton(
                             onPressed: () {
-                              Get.off(LoginScreen());
+                              Get.off(() => LoginScreen());
                             },
                             child: const Text(
                               'Sign In',

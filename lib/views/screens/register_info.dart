@@ -26,37 +26,40 @@ class ContinueSignUpScreen extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: DefaultColors.c4,
-                      backgroundImage: registerInfoController
-                                  .selectedImagePath.value !=
-                              ''
-                          ? FileImage(File(
-                              registerInfoController.selectedImagePath.value))
-                          : null,
-                      radius: 75,
-                      child: SizedBox(
-                        height: 150,
-                        width: 150,
-                        child: RawMaterialButton(
-                          onPressed: () {
-                            registerInfoController
-                                .selectImage(ImageSource.gallery);
-                          },
-                          elevation: 2.0,
-                          shape: const CircleBorder(),
-                          child:
-                              registerInfoController.selectedImagePath.value !=
-                                      ""
-                                  ? null
-                                  : const Icon(
-                                      Icons.add_a_photo_outlined,
-                                      size: 80,
-                                      color: DefaultColors.c5,
-                                    ),
-                        ),
-                      ),
-                    ),
+                   Obx(() =>  CircleAvatar(
+
+                     backgroundColor: DefaultColors.c4,
+                     backgroundImage: registerInfoController
+                         .selectedImagePath.value !=
+                         ''
+                         ? FileImage(File(
+                         registerInfoController.selectedImagePath.value))
+                         : null,
+                     radius: 75,
+                     child: SizedBox(
+                       height: 150,
+                       width: 150,
+                       child: RawMaterialButton(
+                         onLongPress: (){
+                           registerInfoController.selectedImagePath.value='';
+                         },
+                         onPressed: () {
+                           registerInfoController
+                               .selectImage(ImageSource.gallery);                         },
+                         elevation: 2.0,
+                         shape: const CircleBorder(),
+                         child:
+                         registerInfoController.selectedImagePath.value !=
+                             ""
+                             ? null
+                             : const Icon(
+                           Icons.add_a_photo_outlined,
+                           size: 80,
+                           color: DefaultColors.c5,
+                         ),
+                       ),
+                     ),
+                   )),
                     const SizedBox(
                       width: 10,
                     ),
@@ -72,11 +75,11 @@ class ContinueSignUpScreen extends StatelessWidget {
                             child: DefaultTextFormField(
                               hintText: 'First Name',
                               controller:
-                                  registerInfoController.firstNameController,
+                              registerInfoController.firstNameController,
                               keyboardType: TextInputType.name,
                               prefixIcon: Icons.perm_identity,
                               validator:
-                                  registerInfoController.firstNameValidator,
+                              registerInfoController.firstNameValidator,
                             ),
                           ),
                           const SizedBox(
@@ -87,11 +90,11 @@ class ContinueSignUpScreen extends StatelessWidget {
                             child: DefaultTextFormField(
                               hintText: 'Last Name',
                               controller:
-                                  registerInfoController.lastNameController,
+                              registerInfoController.lastNameController,
                               keyboardType: TextInputType.name,
                               prefixIcon: Icons.perm_identity,
                               validator:
-                                  registerInfoController.lastNameValidator,
+                              registerInfoController.lastNameValidator,
                             ),
                           ),
                         ],

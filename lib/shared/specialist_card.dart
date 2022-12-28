@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
-import '../../shared/default_colors.dart';
+import 'default_colors.dart';
 class CardModel{
   final String fullName;
   final String speciality;

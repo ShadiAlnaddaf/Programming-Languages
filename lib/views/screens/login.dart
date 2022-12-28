@@ -1,8 +1,5 @@
 import 'package:consulting/controllers/login_controller.dart';
-import 'package:consulting/http_client/login_http.dart';
-import 'package:consulting/main.dart';
 import 'package:consulting/shared/default_decoration.dart';
-import 'package:consulting/views/screens/home.dart';
 import 'package:consulting/views/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,12 +9,13 @@ import '../../shared/default_material_button.dart';
 import '../../shared/default_text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
-  final LoginController loginController = Get.put(LoginController());
 
   LoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final LoginController loginController = Get.put(LoginController());
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -78,11 +76,9 @@ class LoginScreen extends StatelessWidget {
                               onPressed: () {
                                 if (loginController.formKey.currentState!
                                     .validate()) {
-                                  postLogin(
-                                    loginController.emailController.text,
-                                    loginController.passwordController.text,
-                                  );
-                                    Get.off(const HomeScreen());
+                                  loginController.login(
+                                      loginController.emailController.text,
+                                      loginController.passwordController.text);
                                 }
                               },
                               label: 'Login',
@@ -99,7 +95,7 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                      Get.off(SignUpScreen());
+                                      Get.off(()=>SignUpScreen());
                                     },
                                     child: const Text('Sign Up',
                                         style: TextStyle(

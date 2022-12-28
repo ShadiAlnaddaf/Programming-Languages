@@ -13,8 +13,10 @@ class RegisterInfoController extends GetxController {
 
   var form1Key = GlobalKey<FormState>();
   var form2Key = GlobalKey<FormState>();
-  var selectedImagePath = "".obs;
+  RxString selectedImagePath = ''.obs;
   File? image;
+  ImagePicker imagePicker = ImagePicker();
+
 
   Future pickImage() async {
     try {
@@ -24,9 +26,6 @@ class RegisterInfoController extends GetxController {
       this.image = imageTemp;
     } on PlatformException catch (e) {
       return ('Failed to pick image: $e');
-    }
-    ImageProvider setImage() {
-      return FileImage(File(image!.path));
     }
   }
 
