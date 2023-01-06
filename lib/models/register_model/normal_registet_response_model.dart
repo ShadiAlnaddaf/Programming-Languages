@@ -1,5 +1,5 @@
-class ExpertRegisterModel {
-  ExpertRegisterModel({
+class NormalRegisterResponseModel {
+  NormalRegisterResponseModel({
     required this.status,
     required this.message,
     required this.data,
@@ -9,8 +9,8 @@ class ExpertRegisterModel {
   String message;
   Data data;
 
-  factory ExpertRegisterModel.fromJson(Map<String, dynamic> json) =>
-      ExpertRegisterModel(
+  factory NormalRegisterResponseModel.fromJson(Map<String, dynamic> json) =>
+      NormalRegisterResponseModel(
         status: json["status"],
         message: json["message"],
         data: Data.fromJson(json["data"]),
@@ -25,35 +25,34 @@ class ExpertRegisterModel {
 
 class Data {
   Data({
-    required this.expert,
+    required this.normal,
     required this.token,
   });
 
-  Expert expert;
+  Normal normal;
   String token;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        expert: Expert.fromJson(json["Expert"]),
+        normal: Normal.fromJson(json["Normal"]),
         token: json["token"],
       );
 
   Map<String, dynamic> toJson() => {
-        "Expert": expert.toJson(),
+        "Normal": normal.toJson(),
         "token": token,
       };
 }
 
-class Expert {
-  Expert({
+class Normal {
+  Normal({
     required this.firstName,
     required this.lastName,
     required this.email,
     required this.roleId,
     required this.walletId,
-    required this.number,
-    required this.address,
-    this.image,
+    this.phone,
     required this.id,
+    this.image,
   });
 
   String firstName;
@@ -61,21 +60,19 @@ class Expert {
   String email;
   int roleId;
   int walletId;
-  String number;
-  String address;
-  String? image;
+  String? phone;
   int id;
+  String? image;
 
-  factory Expert.fromJson(Map<String, dynamic> json) => Expert(
+  factory Normal.fromJson(Map<String, dynamic> json) => Normal(
         firstName: json["firstName"],
         lastName: json["lastName"],
         email: json["email"],
         roleId: json["role_id"],
         walletId: json["wallet_id"],
-        number: json["number"],
-        address: json["address"],
-        image: json["image"],
+        phone: json["phone"],
         id: json["id"],
+        image: json["image"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -84,9 +81,8 @@ class Expert {
         "email": email,
         "role_id": roleId,
         "wallet_id": walletId,
-        "number": number,
-        "address": address,
-        "image": image,
+        "phone": phone,
         "id": id,
+        "image": image,
       };
 }

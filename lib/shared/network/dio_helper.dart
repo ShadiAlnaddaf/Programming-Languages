@@ -8,7 +8,7 @@ class DioHelper {
       BaseOptions(
         headers: {
           'Content-Type': 'application/json',
-          'Accept':'application/json'
+          'Accept': 'application/json'
         },
         baseUrl: 'http://192.168.1.132/api/',
         receiveDataWhenStatusError: true,

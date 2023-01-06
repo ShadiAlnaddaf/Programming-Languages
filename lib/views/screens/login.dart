@@ -9,13 +9,11 @@ import '../../shared/default_material_button.dart';
 import '../../shared/default_text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
-
   LoginScreen({Key? key}) : super(key: key);
+  final LoginController loginController = Get.put(LoginController() , permanent: false);
 
   @override
   Widget build(BuildContext context) {
-    final LoginController loginController = Get.put(LoginController());
-
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -95,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                      Get.off(()=>SignUpScreen());
+                                      Get.off(() => SignUpScreen())!.then((value) => Get.delete<LoginController>());
                                     },
                                     child: const Text('Sign Up',
                                         style: TextStyle(

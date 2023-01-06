@@ -1,32 +1,97 @@
 import 'dart:io';
+import 'package:consulting/models/register_model/expert_register_request_model.dart';
+import 'package:consulting/models/register_model/expert_register_response_model.dart';
+import 'package:consulting/shared/network/dio_helper.dart';
+import 'package:consulting/views/screens/main_app.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:get/get.dart' hide FormData;
 class RegisterInfoController extends GetxController {
-  late bool isExpert;
+  Rx<List<Day>> days = Rx(<Day>[]);
+  List<DropdownMenuItem<RxInt>> specialities = [
+    DropdownMenuItem(
+      value: RxInt(-1),
+      child: const Text('Select Your Specialities'),
+    ),
+    DropdownMenuItem(
+      value: RxInt(1),
+      child: const Text('Law'),
+    ),
+    DropdownMenuItem(
+      value: RxInt(2),
+      child: const Text('Medical'),
+    ),
+    DropdownMenuItem(
+      value: RxInt(3),
+      child: const Text('Mental Health'),
+    ),
+    DropdownMenuItem(
+      value: RxInt(4),
+      child: const Text('Business'),
+    ),
+    DropdownMenuItem(
+      value: RxInt(5),
+      child: const Text('Family'),
+    ),
+    DropdownMenuItem(
+      value: RxInt(6),
+      child: const Text('Nutrition'),
+    ),
+  ];
+  RxInt selectedSpecialities = RxInt(-1);
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController detailsController = TextEditingController();
-
+  TextEditingController addressController = TextEditingController();
   var form1Key = GlobalKey<FormState>();
   var form2Key = GlobalKey<FormState>();
+  var form3Key = GlobalKey<FormState>();
   RxString selectedImagePath = ''.obs;
-  File? image;
-  ImagePicker imagePicker = ImagePicker();
+  FormData formData = FormData();
 
-
-  Future pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final imageTemp = File(image.path);
-      this.image = imageTemp;
-    } on PlatformException catch (e) {
-      return ('Failed to pick image: $e');
-    }
+  Future<void> expertRegister({File? image,
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String confirm,
+    required int roleId,
+    required String number,
+    required String address,
+    required List<Day> days,
+    required List<Speciality> specialities,
+  }) async {
+    DioHelper.postData(
+        url: 'register',
+        data: ExpertRegisterRequestModel(
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            confirm: confirm,
+            roleId: roleId,
+            number: number,
+            address: address,
+            days: days,
+            specialities: specialities)
+            .toJson())
+        .then((value) {
+      if (ExpertRegisterResponseModel
+          .fromJson(value.data)
+          .data
+          ?.token !=
+          null) {
+        debugPrint('register successful');
+        debugPrint(ExpertRegisterResponseModel
+            .fromJson(value.data)
+            .data
+            ?.toJson()
+            .toString());
+        Get.offAll(() => const MainAppScreen());
+      }
+    });
   }
 
   void selectImage(ImageSource imageSource) async {
@@ -34,7 +99,7 @@ class RegisterInfoController extends GetxController {
     if (selectedItem != null) {
       selectedImagePath.value = selectedItem.path;
     } else {
-      print('No Image Selected');
+      Get.snackbar('Warning', 'No Image Selected');
     }
   }
 
@@ -65,4 +130,28 @@ class RegisterInfoController extends GetxController {
     }
     return null;
   }
+
+  String? addressValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Enter your Address';
+    }
+    return null;
+  }
+
+  // void expertRegister({required String firstName,
+  //   required String lastName,
+  //   required String email,
+  //   required String password,
+  //   required String confirm,
+  //   required int roleId,
+  //   required String number,
+  //   required String address,
+  //   required List<Day> days,
+  //   required List<Speciality> specialities,
+  //   File? image,
+  // }) async{
+  //   FormData data = FormData.fromMap(ExpertRegisterRequestModel(firstName: firstName, lastName: lastName, email: email, password: password, confirm: confirm, roleId: roleId, number: number, address: address, days: days, specialities: specialities).toJson());
+  //   await DioHelper.postData(url: 'register', data: data)
+  // }
 }
+

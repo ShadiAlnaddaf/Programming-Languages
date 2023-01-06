@@ -17,6 +17,7 @@ List<CategoryModel> category = [
   CategoryModel('Mental', 'assets/icons/mental.png', () {}),
 ];
 Widget buildCategoriesCard(List<CategoryModel> category , int index)=>MaterialButton(
+  splashColor: Colors.blue,
   onPressed: category[index].function,
   child: Column(
     children: [
