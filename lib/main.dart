@@ -1,6 +1,9 @@
+import 'package:consulting/controllers/register_info_controller.dart';
 import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
 import 'package:consulting/views/screens/login.dart';
+import 'package:consulting/views/screens/main_app.dart';
+import 'package:consulting/views/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,9 +20,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   GetMaterialApp(
+    return    GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: MainAppScreen(),
+      getPages: [
+        GetPage(name: '/', page: ()=>LoginScreen()),
+      ],
     );
   }
 }

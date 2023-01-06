@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
-
+  late bool isExpert;
   RxBool passwordVisibility = true.obs;
   var formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
@@ -21,7 +21,10 @@ class RegisterController extends GetxController {
     return null;
   }
   String? confirmPasswordValidator(String? value) {
-   if(passwordController.text != value){
+    if (value == null || value.isEmpty) {
+      return 'Confirm Password Must Not be Empty!';
+    }
+   else if(passwordController.text != value){
      return "Password doesn't Match";
    }
    return null;

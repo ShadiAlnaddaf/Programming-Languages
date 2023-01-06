@@ -1,3 +1,4 @@
+import 'package:consulting/models/login_model.dart';
 import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/network/dio_exception.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
@@ -6,15 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  @override
-  void dispose() {
-    Get.delete<LoginController>();
-    super.dispose();
-  }
   RxBool passwordVisibility = true.obs;
   var formKey = GlobalKey<FormState>();
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+
   void setPasswordVisibility() {
     passwordVisibility.value = !passwordVisibility.value;
   }
@@ -45,7 +42,7 @@ class LoginController extends GetxController {
     ).then((value) {
       if (value.data['data']['token'] != null) {
         CacheHelper.setString('token', value.data['data']['token']);
-        Get.offAll(() => const AppScreen());
+        Get.offAll(() => const MainAppScreen());
       }
     }).catchError((e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();

@@ -6,14 +6,14 @@ import 'package:consulting/views/screens/setting.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class AppScreen extends StatefulWidget {
-  const AppScreen({Key? key}) : super(key: key);
+class MainAppScreen extends StatefulWidget {
+  const MainAppScreen({Key? key}) : super(key: key);
 
   @override
-  State<AppScreen> createState() => _AppScreenState();
+  State<MainAppScreen> createState() => _MainAppScreenState();
 }
 
-class _AppScreenState extends State<AppScreen> {
+class _MainAppScreenState extends State<MainAppScreen> {
   int currentPageIndex = 0;
 
   @override

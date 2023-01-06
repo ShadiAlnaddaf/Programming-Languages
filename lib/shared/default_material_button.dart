@@ -13,8 +13,8 @@ class DefaultMaterialButton extends StatelessWidget {
       {Key? key,
       required this.onPressed,
       required this.label,
-      this.width = 110,
-      this.height = 45,
+      this.width = 150,
+      this.height = 50,
       this.color = DefaultColors.c3})
       : super(key: key);
 

@@ -1,5 +1,4 @@
 import 'package:consulting/controllers/register_controller.dart';
-import 'package:consulting/controllers/register_info_controller.dart';
 import 'package:consulting/views/screens/login.dart';
 import 'package:consulting/views/screens/register_info.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +12,7 @@ import '../../shared/default_text_form_field.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
   final RegisterController registerController =
-      Get.put(RegisterController(), permanent: true);
-  final RegisterInfoController registerInfoController =
-      Get.put(RegisterInfoController(), permanent: true);
+      Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -107,8 +104,12 @@ class SignUpScreen extends StatelessWidget {
                                 height: Get.height * 0.15,
                                 child: IconButton(
                                   onPressed: () {
-                                    registerInfoController.isExpert = false;
-                                    Get.to(() => ContinueSignUpScreen());
+                                    if (registerController.formKey.currentState!
+                                        .validate()) {
+                                      registerController.isExpert=false;
+                                      Get.to(() => ContinueSignUpScreen(
+                                          ));
+                                    }
                                   },
                                   icon: SvgPicture.asset(
                                       'assets/images/user.svg'),
@@ -133,8 +134,12 @@ class SignUpScreen extends StatelessWidget {
                                 height: Get.height * 0.15,
                                 child: IconButton(
                                   onPressed: () {
-                                    registerInfoController.isExpert = true;
-                                    Get.to(() => ContinueSignUpScreen());
+                                    if (registerController.formKey.currentState!
+                                        .validate()) {
+                                      registerController.isExpert= true;
+                                      Get.to(() =>
+                                          ContinueSignUpScreen());
+                                    }
                                   },
                                   icon: SvgPicture.asset(
                                       'assets/images/sp-list.svg'),
