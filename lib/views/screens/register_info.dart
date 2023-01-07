@@ -1,12 +1,14 @@
+import 'dart:io';
+
 import 'package:consulting/controllers/register_controller.dart';
 import 'package:consulting/controllers/register_info_controller.dart';
 import 'package:consulting/models/register_model/expert_register_request_model.dart';
-import 'package:consulting/shared/default_decoration.dart';
 import 'package:consulting/shared/date_selector.dart';
+import 'package:consulting/shared/default_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+
 import '../../shared/default_colors.dart';
 import '../../shared/default_material_button.dart';
 import '../../shared/default_text_form_field.dart';
@@ -79,7 +81,7 @@ class ContinueSignUpScreen extends StatelessWidget {
                           SizedBox(
                             width: 200,
                             child: DefaultTextFormField(
-                              hintText: 'First Name',
+                              hintText: '18'.tr,
                               controller:
                                   registerInfoController.firstNameController,
                               keyboardType: TextInputType.name,
@@ -94,7 +96,7 @@ class ContinueSignUpScreen extends StatelessWidget {
                           SizedBox(
                             width: 200,
                             child: DefaultTextFormField(
-                              hintText: 'Last Name',
+                              hintText: '19'.tr,
                               controller:
                                   registerInfoController.lastNameController,
                               keyboardType: TextInputType.name,
@@ -116,7 +118,7 @@ class ContinueSignUpScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       DefaultTextFormField(
-                        hintText: 'Phone Number',
+                        hintText: '20'.tr,
                         controller:
                             registerInfoController.phoneNumberController,
                         keyboardType: TextInputType.number,
@@ -127,7 +129,7 @@ class ContinueSignUpScreen extends StatelessWidget {
                         height: 10,
                       ),
                       DefaultTextFormField(
-                        hintText: 'Address',
+                        hintText: '21'.tr,
                         controller: registerInfoController.addressController,
                         keyboardType: TextInputType.text,
                         validator: registerInfoController.addressValidator,
@@ -156,7 +158,7 @@ class ContinueSignUpScreen extends StatelessWidget {
                                       AutovalidateMode.onUserInteraction,
                                   validator: (value) {
                                     if (value!.value == -1) {
-                                      return "Select Your Speciality";
+                                      return "22".tr;
                                     }
                                     return null;
                                   },
@@ -171,7 +173,7 @@ class ContinueSignUpScreen extends StatelessWidget {
                               height: 10,
                             ),
                             DefaultTextFormField(
-                              hintText: 'Details about you',
+                              hintText: '23'.tr,
                               controller:
                                   registerInfoController.detailsController,
                               keyboardType: TextInputType.text,
@@ -198,9 +200,8 @@ class ContinueSignUpScreen extends StatelessWidget {
                     if (registerController.isExpert) {
                       if (registerInfoController.days.value.isEmpty) {
                         Get.defaultDialog(
-                            title: "Wrong",
-                            middleText:
-                                "You can't Sign Up Without Select any available Day",
+                            title: "24".tr,
+                            middleText: "25".tr,
                             onConfirm: () {
                               Get.back();
                             });
@@ -241,23 +242,22 @@ class ContinueSignUpScreen extends StatelessWidget {
                             .validate()) {
                       debugPrint('normal');
                       registerInfoController.normalRegister(
-                        roleId: 2,
-                        firstName:
-                            registerInfoController.firstNameController.text,
-                        lastName:
-                            registerInfoController.lastNameController.text,
-                        email: registerController.emailController.text,
-                        password: registerController.passwordController.text,
-                        confirm:
-                            registerController.confirmPasswordController.text,
-                        number:
-                            registerInfoController.phoneNumberController.text,
-                        address:
-                          registerInfoController.addressController.text
-                      );
+                          roleId: 2,
+                          firstName:
+                              registerInfoController.firstNameController.text,
+                          lastName:
+                              registerInfoController.lastNameController.text,
+                          email: registerController.emailController.text,
+                          password: registerController.passwordController.text,
+                          confirm:
+                              registerController.confirmPasswordController.text,
+                          number:
+                              registerInfoController.phoneNumberController.text,
+                          address:
+                              registerInfoController.addressController.text);
                     }
                   },
-                  label: 'Sign Up',
+                  label: '5'.tr,
                 )
               ],
             ),
