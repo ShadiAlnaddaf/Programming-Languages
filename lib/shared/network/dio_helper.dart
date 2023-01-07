@@ -10,7 +10,7 @@ class DioHelper {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        baseUrl: 'http://192.168.1.109/api/',
+        baseUrl: 'http://192.168.1.38/api/',
         receiveDataWhenStatusError: true,
       ),
     );
@@ -28,10 +28,11 @@ class DioHelper {
     );
   }
 
-  static Future<dio.Response> getData(
-      {required String url,
+  static Future<dio.Response> getData({
+      required String url,
       Map<String, dynamic>? queryParams,
-      required String token}) async {
+      required String token,
+      }) async {
     _dio.options.headers["Authorization"] = "Bearer $token";
     return await _dio.get(url, queryParameters: queryParams);
   }

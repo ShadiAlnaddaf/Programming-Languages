@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:consulting/controllers/main_app_controller.dart';
 import 'package:consulting/models/specialist_model.dart';
 import 'package:consulting/shared/default_colors.dart';
+import 'package:consulting/shared/default_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:consulting/shared/default_decoration.dart';
 import 'package:get/get.dart';
@@ -97,6 +98,32 @@ class ExpertInfoScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  DefaultMaterialButton(
+                    onPressed: () {
+                      expertShowController.getAvailableTime(thisExpert.id);
+                    },
+                    label: 'Available Time',
+                    color: DefaultColors.c5,
+                    height: 75,
+                    width: Get.width * 0.4,
+                  ),
+                  DefaultMaterialButton(
+                    onPressed: () {
+                      print(expertShowController.availableTime.data!.times);
+                    },
+                    label: 'Book a Date',
+                    color: DefaultColors.c5,
+                    height: 75,
+                    width: Get.width * 0.4,
+                  ),
+                ],
               ),
             ),
           ],

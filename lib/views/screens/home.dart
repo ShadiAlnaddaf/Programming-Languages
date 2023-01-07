@@ -127,7 +127,7 @@ class HomeScreen extends StatelessWidget {
               Expanded(
                   flex: 4,
                   child: Obx(() {
-                    return homeController.isLoading.value
+                    return homeController.isLoadingExpertList.value
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
