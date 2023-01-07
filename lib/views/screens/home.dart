@@ -15,10 +15,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     homeController.getSpecialists(
-      isFavorite: homeController.isFavorite,
+        isFavorite: homeController.isFavorite,
         token: CacheHelper.getString('token').toString());
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           decoration: defaultDecoration(),
           child: Column(
@@ -43,6 +44,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       Expanded(
+                        flex: 5,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,

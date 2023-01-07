@@ -55,7 +55,7 @@ class HomeController extends GetxController {
 
   void addFavorites({required String token, required int expertId}) =>
       DioHelper.addFavorite(token: token, expertId: expertId)
-          .then((value) => debugPrint(value.data))
+          .then((value) => debugPrint(value.data.toString()))
           .catchError((e) {
         final errorMessage = DioExceptions.fromDioError(e).toString();
         debugPrint(errorMessage);
@@ -63,7 +63,7 @@ class HomeController extends GetxController {
 
   void deleteFavorites({required String token, required int expertId}) =>
       DioHelper.deleteFavorite(token: token, expertId: expertId)
-          .then((value) => debugPrint(value.data))
+          .then((value) => debugPrint(value.data.toString()))
           .catchError((e) {
         final errorMessage = DioExceptions.fromDioError(e).toString();
         debugPrint(errorMessage);
@@ -177,7 +177,7 @@ class HomeController extends GetxController {
                       isFavorite[index].value == 1
                           ? isFavorite[index].value = 0
                           : isFavorite[index].value = 1;
-                      isFavorite[index].value == 0
+                      isFavorite[index].value == 1
                           ? addFavorites(
                               token: CacheHelper.getString('token').toString(),
                               expertId: specialists.data.experts[index].id)
