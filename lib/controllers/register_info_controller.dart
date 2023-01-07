@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:consulting/models/register_model/expert_register_request_model.dart';
 import 'package:consulting/models/register_model/expert_register_response_model.dart';
 import 'package:consulting/models/register_model/normal_register_request_model.dart';
@@ -6,39 +7,39 @@ import 'package:consulting/models/register_model/normal_registet_response_model.
 import 'package:consulting/shared/network/dio_helper.dart';
 import 'package:consulting/views/screens/main_app.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart' hide FormData;
+import 'package:image_picker/image_picker.dart';
 
 class RegisterInfoController extends GetxController {
   Rx<List<Day>> days = Rx(<Day>[]);
   List<DropdownMenuItem<RxInt>> specialities = [
     DropdownMenuItem(
       value: RxInt(-1),
-      child: const Text('Select Your Specialities'),
+      child: Text('22'.tr),
     ),
     DropdownMenuItem(
       value: RxInt(1),
-      child: const Text('Law'),
+      child: Text('26'.tr),
     ),
     DropdownMenuItem(
       value: RxInt(2),
-      child: const Text('Medical'),
+      child: Text('27'.tr),
     ),
     DropdownMenuItem(
       value: RxInt(3),
-      child: const Text('Mental Health'),
+      child: Text('28'.tr),
     ),
     DropdownMenuItem(
       value: RxInt(4),
-      child: const Text('Business'),
+      child: Text('29'.tr),
     ),
     DropdownMenuItem(
       value: RxInt(5),
-      child: const Text('Family'),
+      child: Text('30'.tr),
     ),
     DropdownMenuItem(
       value: RxInt(6),
-      child: const Text('Nutrition'),
+      child: Text('31'.tr),
     ),
   ];
   RxInt selectedSpecialities = RxInt(-1);
@@ -133,41 +134,41 @@ class RegisterInfoController extends GetxController {
     if (selectedItem != null) {
       selectedImagePath.value = selectedItem.path;
     } else {
-      Get.snackbar('Warning', 'No Image Selected');
+      Get.snackbar('37'.tr, '38'.tr);
     }
   }
 
   String? firstNameValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter your first name!';
+      return '32'.tr;
     }
     return null;
   }
 
   String? lastNameValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter your Last Name!';
+      return '33'.tr;
     }
     return null;
   }
 
   String? phoneNumberValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter your phone number!';
+      return '34'.tr;
     }
     return null;
   }
 
   String? detailsValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter your Details!';
+      return '35'.tr;
     }
     return null;
   }
 
   String? addressValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter your Address';
+      return '36'.tr;
     }
     return null;
   }

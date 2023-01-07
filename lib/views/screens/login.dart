@@ -1,10 +1,11 @@
 import 'package:consulting/controllers/login_controller.dart';
-import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/default_decoration.dart';
 import 'package:consulting/views/screens/register.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../shared/default_colors.dart';
 import '../../shared/default_material_button.dart';
 import '../../shared/default_text_form_field.dart';
@@ -37,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             DefaultTextFormField(
                               controller: loginController.emailController,
-                              hintText: 'Email',
+                              hintText: "1".tr,
                               keyboardType: TextInputType.emailAddress,
                               prefixIcon: Icons.email,
                               validator: loginController.emailValidator,
@@ -48,7 +49,7 @@ class LoginScreen extends StatelessWidget {
                             Obx(
                               () => DefaultTextFormField(
                                 controller: loginController.passwordController,
-                                hintText: 'Password',
+                                hintText: "2".tr,
                                 keyboardType: TextInputType.visiblePassword,
                                 prefixIcon: Icons.lock,
                                 suffixIcon: IconButton(
@@ -78,17 +79,16 @@ class LoginScreen extends StatelessWidget {
                                   loginController.login(
                                       loginController.emailController.text,
                                       loginController.passwordController.text);
-
                                 }
                               },
-                              label: 'Login',
+                              label: '3'.tr,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text(
-                                  'Didn\'t have an account?',
-                                  style: TextStyle(fontSize: 15),
+                                Text(
+                                  '4'.tr,
+                                  style: const TextStyle(fontSize: 15),
                                 ),
                                 const SizedBox(
                                   width: 5,
@@ -99,8 +99,8 @@ class LoginScreen extends StatelessWidget {
                                           (value) =>
                                               Get.delete<LoginController>());
                                     },
-                                    child: const Text('Sign Up',
-                                        style: TextStyle(
+                                    child: Text('5'.tr,
+                                        style: const TextStyle(
                                             color: DefaultColors.c3,
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold)))

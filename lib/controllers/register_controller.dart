@@ -12,26 +12,28 @@ class RegisterController extends GetxController {
   void setPasswordVisibility() {
     passwordVisibility.value = !passwordVisibility.value;
   }
+
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter Password';
+      return '10'.tr;
     } else if (value.length < 8 || value.length > 20) {
-      return 'Password Must be between 8 & 20 Character';
+      return '7'.tr;
     }
     return null;
   }
+
   String? confirmPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Confirm Password Must Not be Empty!';
+      return '17'.tr;
+    } else if (passwordController.text != value) {
+      return '16'.tr;
     }
-   else if(passwordController.text != value){
-     return "Password doesn't Match";
-   }
-   return null;
+    return null;
   }
+
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter Email';
+      return '6'.tr;
     }
     return null;
   }

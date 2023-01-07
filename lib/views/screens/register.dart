@@ -1,18 +1,18 @@
 import 'package:consulting/controllers/register_controller.dart';
+import 'package:consulting/shared/default_decoration.dart';
 import 'package:consulting/views/screens/login.dart';
 import 'package:consulting/views/screens/register_info.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:consulting/shared/default_decoration.dart';
-import 'package:lottie/lottie.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+
 import '../../shared/default_colors.dart';
 import '../../shared/default_text_form_field.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
-  final RegisterController registerController =
-      Get.put(RegisterController());
+  final RegisterController registerController = Get.put(RegisterController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
                           children: [
                             DefaultTextFormField(
                               controller: registerController.emailController,
-                              hintText: 'Email',
+                              hintText: '1'.tr,
                               keyboardType: TextInputType.emailAddress,
                               prefixIcon: Icons.email,
                               validator: registerController.emailValidator,
@@ -50,7 +50,7 @@ class SignUpScreen extends StatelessWidget {
                               () => DefaultTextFormField(
                                 controller:
                                     registerController.passwordController,
-                                hintText: 'Password',
+                                hintText: '2'.tr,
                                 keyboardType: TextInputType.visiblePassword,
                                 prefixIcon: Icons.lock,
                                 suffixIcon: IconButton(
@@ -78,7 +78,7 @@ class SignUpScreen extends StatelessWidget {
                               () => DefaultTextFormField(
                                 controller: registerController
                                     .confirmPasswordController,
-                                hintText: 'Confirm Password',
+                                hintText: '11'.tr,
                                 keyboardType: TextInputType.visiblePassword,
                                 prefixIcon: Icons.lock,
                                 obscureText:
@@ -106,18 +106,17 @@ class SignUpScreen extends StatelessWidget {
                                   onPressed: () {
                                     if (registerController.formKey.currentState!
                                         .validate()) {
-                                      registerController.isExpert=false;
-                                      Get.to(() => ContinueSignUpScreen(
-                                          ));
+                                      registerController.isExpert = false;
+                                      Get.to(() => ContinueSignUpScreen());
                                     }
                                   },
                                   icon: SvgPicture.asset(
                                       'assets/images/user.svg'),
                                 ),
                               ),
-                              const Text(
-                                'Sign Up As User',
-                                style: TextStyle(
+                              Text(
+                                '12'.tr,
+                                style: const TextStyle(
                                     color: DefaultColors.c3,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
@@ -136,18 +135,17 @@ class SignUpScreen extends StatelessWidget {
                                   onPressed: () {
                                     if (registerController.formKey.currentState!
                                         .validate()) {
-                                      registerController.isExpert= true;
-                                      Get.to(() =>
-                                          ContinueSignUpScreen());
+                                      registerController.isExpert = true;
+                                      Get.to(() => ContinueSignUpScreen());
                                     }
                                   },
                                   icon: SvgPicture.asset(
                                       'assets/images/sp-list.svg'),
                                 ),
                               ),
-                              const Text(
-                                'Sign Up As specialist',
-                                style: TextStyle(
+                              Text(
+                                '13'.tr,
+                                style: const TextStyle(
                                     color: DefaultColors.c3,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
@@ -162,9 +160,9 @@ class SignUpScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
-                            'Already have an account?',
-                            style: TextStyle(fontSize: 15),
+                          Text(
+                            '14'.tr,
+                            style: const TextStyle(fontSize: 15),
                           ),
                           const SizedBox(
                             width: 5,
@@ -173,9 +171,9 @@ class SignUpScreen extends StatelessWidget {
                             onPressed: () {
                               Get.off(() => LoginScreen());
                             },
-                            child: const Text(
-                              'Sign In',
-                              style: TextStyle(
+                            child: Text(
+                              '15'.tr,
+                              style: const TextStyle(
                                   color: DefaultColors.c3,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold),

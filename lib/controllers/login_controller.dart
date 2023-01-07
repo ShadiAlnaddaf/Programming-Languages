@@ -19,21 +19,22 @@ class LoginController extends GetxController {
 
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter Password';
+      return '10'.tr;
     } else if (value.length < 8 || value.length > 20) {
-      return 'Password Must be between 8 & 20 Character';
+      return '7'.tr;
     }
     return null;
   }
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Enter Email';
+      return '6'.tr;
     }
     return null;
   }
+
   sp.SpecialistModel specialists =
-  sp.SpecialistModel(message: "", status: "", data: sp.Datas(experts: []));
+      sp.SpecialistModel(message: "", status: "", data: sp.Data(experts: []));
   void login(String email, String password) {
     DioHelper.postData(
       url: '/login',
@@ -50,19 +51,16 @@ class LoginController extends GetxController {
     }).catchError((e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       if (errorMessage.contains('Bad')) {
-        Get.snackbar(errorMessage, 'Email or Password Wrong');
+        Get.snackbar(errorMessage, '8'.tr);
       } else {
-        Get.snackbar(errorMessage, 'No Internet Connection');
+        Get.snackbar(errorMessage, '9'.tr);
       }
     });
-
   }
+
   Future<void> getSpecialists({required String token}) async {
     print(token);
-    DioHelper.getData(
-        url: 'experts',
-        token: token
-    ).then((response) {
+    DioHelper.getData(url: 'experts', token: token).then((response) {
       specialists = sp.SpecialistModel.fromJson(response.data);
     }).catchError((e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
