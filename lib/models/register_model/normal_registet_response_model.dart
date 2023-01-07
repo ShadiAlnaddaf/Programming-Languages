@@ -7,7 +7,7 @@ class NormalRegisterResponseModel {
 
   String status;
   String message;
-  Data data;
+  Data? data;
 
   factory NormalRegisterResponseModel.fromJson(Map<String, dynamic> json) =>
       NormalRegisterResponseModel(
@@ -19,7 +19,7 @@ class NormalRegisterResponseModel {
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
-        "data": data.toJson(),
+        "data": data?.toJson(),
       };
 }
 

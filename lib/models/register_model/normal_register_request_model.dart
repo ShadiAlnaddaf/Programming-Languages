@@ -7,7 +7,8 @@ class NormalRegisterRequestModel {
     required this.lastName,
     this.image,
     required this.roleId,
-    this.number,
+    required this.number,
+    required this.address
   });
 
   String email;
@@ -17,7 +18,8 @@ class NormalRegisterRequestModel {
   String lastName;
   String? image;
   int roleId;
-  String? number;
+  String number;
+  String address;
 
   factory NormalRegisterRequestModel.fromJson(Map<String, dynamic> json) =>
       NormalRegisterRequestModel(
@@ -29,6 +31,7 @@ class NormalRegisterRequestModel {
         image: json["image"],
         roleId: json["role_id"],
         number: json["number"],
+        address: json["address"]
       );
 
   Map<String, dynamic> toJson() => {
@@ -40,5 +43,6 @@ class NormalRegisterRequestModel {
         "image": image,
         "role_id": roleId,
         "number": number,
+        "address": address
       };
 }

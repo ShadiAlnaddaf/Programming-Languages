@@ -1,12 +1,14 @@
 import 'dart:io';
 import 'package:consulting/models/register_model/expert_register_request_model.dart';
 import 'package:consulting/models/register_model/expert_register_response_model.dart';
+import 'package:consulting/models/register_model/normal_register_request_model.dart';
+import 'package:consulting/models/register_model/normal_registet_response_model.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
 import 'package:consulting/views/screens/main_app.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart' hide FormData;
+
 class RegisterInfoController extends GetxController {
   Rx<List<Day>> days = Rx(<Day>[]);
   List<DropdownMenuItem<RxInt>> specialities = [
@@ -49,9 +51,9 @@ class RegisterInfoController extends GetxController {
   var form2Key = GlobalKey<FormState>();
   var form3Key = GlobalKey<FormState>();
   RxString selectedImagePath = ''.obs;
-  FormData formData = FormData();
 
-  Future<void> expertRegister({File? image,
+  Future<void> expertRegister({
+    File? image,
     required String firstName,
     required String lastName,
     required String email,
@@ -64,28 +66,60 @@ class RegisterInfoController extends GetxController {
     required List<Speciality> specialities,
   }) async {
     DioHelper.postData(
-        url: 'register',
-        data: ExpertRegisterRequestModel(
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password,
-            confirm: confirm,
-            roleId: roleId,
-            number: number,
-            address: address,
-            days: days,
-            specialities: specialities)
-            .toJson())
+            url: 'register',
+            data: ExpertRegisterRequestModel(
+                    firstName: firstName,
+                    lastName: lastName,
+                    email: email,
+                    password: password,
+                    confirm: confirm,
+                    roleId: roleId,
+                    number: number,
+                    address: address,
+                    days: days,
+                    specialities: specialities)
+                .toJson())
         .then((value) {
-      if (ExpertRegisterResponseModel
-          .fromJson(value.data)
-          .data
-          ?.token !=
+      if (ExpertRegisterResponseModel.fromJson(value.data).data?.token !=
           null) {
         debugPrint('register successful');
-        debugPrint(ExpertRegisterResponseModel
-            .fromJson(value.data)
+        debugPrint(ExpertRegisterResponseModel.fromJson(value.data)
+            .data
+            ?.toJson()
+            .toString());
+        Get.offAll(() => const MainAppScreen());
+      }
+    });
+  }
+
+  Future<void> normalRegister({
+    File? image,
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+    required String confirm,
+    required int roleId,
+    required String address,
+    required String number,
+  }) async {
+    DioHelper.postData(
+            url: 'register',
+            data: NormalRegisterRequestModel(
+                    email: email,
+                    password: password,
+                    confirm: confirm,
+                    firstName: firstName,
+                    lastName: lastName,
+                    roleId: 2,
+                    address: address,
+                    number: number)
+                .toJson())
+        .then((response) {
+      if (NormalRegisterResponseModel.fromJson(response.data).data?.token !=
+          null) {
+        debugPrint('register successful');
+        debugPrint(NormalRegisterResponseModel.fromJson(response.data)
             .data
             ?.toJson()
             .toString());
@@ -137,21 +171,4 @@ class RegisterInfoController extends GetxController {
     }
     return null;
   }
-
-  // void expertRegister({required String firstName,
-  //   required String lastName,
-  //   required String email,
-  //   required String password,
-  //   required String confirm,
-  //   required int roleId,
-  //   required String number,
-  //   required String address,
-  //   required List<Day> days,
-  //   required List<Speciality> specialities,
-  //   File? image,
-  // }) async{
-  //   FormData data = FormData.fromMap(ExpertRegisterRequestModel(firstName: firstName, lastName: lastName, email: email, password: password, confirm: confirm, roleId: roleId, number: number, address: address, days: days, specialities: specialities).toJson());
-  //   await DioHelper.postData(url: 'register', data: data)
-  // }
 }
-

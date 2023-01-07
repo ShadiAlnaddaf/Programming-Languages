@@ -1,10 +1,11 @@
-import 'package:consulting/models/login_model.dart';
 import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/network/dio_exception.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
 import 'package:consulting/views/screens/main_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../models/specialist_model.dart' as sp;
 
 class LoginController extends GetxController {
   RxBool passwordVisibility = true.obs;
@@ -31,7 +32,8 @@ class LoginController extends GetxController {
     }
     return null;
   }
-
+  sp.SpecialistModel specialists =
+  sp.SpecialistModel(message: "", status: "", data: sp.Data(experts: []));
   void login(String email, String password) {
     DioHelper.postData(
       url: '/login',
@@ -40,6 +42,7 @@ class LoginController extends GetxController {
         "password": password,
       },
     ).then((value) {
+      print('token when login: ${value.data['data']['token']}');
       if (value.data['data']['token'] != null) {
         CacheHelper.setString('token', value.data['data']['token']);
         Get.offAll(() => const MainAppScreen());
@@ -51,6 +54,19 @@ class LoginController extends GetxController {
       } else {
         Get.snackbar(errorMessage, 'No Internet Connection');
       }
+    });
+
+  }
+  Future<void> getSpecialists({required String token}) async {
+    print(token);
+    DioHelper.getData(
+        url: 'experts',
+        token: token
+    ).then((response) {
+      specialists = sp.SpecialistModel.fromJson(response.data);
+    }).catchError((e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      debugPrint(errorMessage);
     });
   }
 }

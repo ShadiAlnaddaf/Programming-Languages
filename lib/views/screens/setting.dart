@@ -13,7 +13,10 @@ class SettingScreen extends StatelessWidget {
         child: ElevatedButton(
           child: Text('Sign Out'),
           onPressed: (){
+            print(CacheHelper.getString('token'));
+
             CacheHelper.sharedPreferences.clear();
+            print(CacheHelper.getString('token'));
             Get.offAll(()=>LoginScreen());
           },
         ),

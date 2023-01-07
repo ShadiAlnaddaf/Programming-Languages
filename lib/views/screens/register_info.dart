@@ -113,12 +113,27 @@ class ContinueSignUpScreen extends StatelessWidget {
                 ),
                 Form(
                   key: registerInfoController.form3Key,
-                  child: DefaultTextFormField(
-                    hintText: 'Phone Number',
-                    controller: registerInfoController.phoneNumberController,
-                    keyboardType: TextInputType.number,
-                    validator: registerInfoController.phoneNumberValidator,
-                    prefixIcon: Icons.phone_android,
+                  child: Column(
+                    children: [
+                      DefaultTextFormField(
+                        hintText: 'Phone Number',
+                        controller:
+                            registerInfoController.phoneNumberController,
+                        keyboardType: TextInputType.number,
+                        validator: registerInfoController.phoneNumberValidator,
+                        prefixIcon: Icons.phone_android,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      DefaultTextFormField(
+                        hintText: 'Address',
+                        controller: registerInfoController.addressController,
+                        keyboardType: TextInputType.text,
+                        validator: registerInfoController.addressValidator,
+                        prefixIcon: Icons.location_on_outlined,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
@@ -167,15 +182,6 @@ class ContinueSignUpScreen extends StatelessWidget {
                             const SizedBox(
                               height: 10,
                             ),
-                            DefaultTextFormField(
-                              hintText: 'Address',
-                              controller:
-                                  registerInfoController.addressController,
-                              keyboardType: TextInputType.text,
-                              validator:
-                                  registerInfoController.addressValidator,
-                              prefixIcon: Icons.location_on_outlined,
-                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: CustomDateSelector(onChanged: (val) {
@@ -189,57 +195,68 @@ class ContinueSignUpScreen extends StatelessWidget {
                   ),
                 DefaultMaterialButton(
                   onPressed: () {
-                    print(registerInfoController.days.toString());
-                    if (registerController.isExpert &&
-                        registerInfoController.days.value.isEmpty) {
-                      Get.defaultDialog(
-                          title: "Wrong",
-                          middleText:
-                              "You can't Sign Up Without Select any available Day",
-                          onConfirm: () {
-                            Get.back();
-                          });
-                    } else if (registerController.isExpert &&
-                        registerInfoController.days.value.isNotEmpty &&
-                        (registerInfoController.form1Key.currentState!
-                                .validate() ||
-                            registerInfoController.form3Key.currentState!
-                                .validate() ||
-                            registerInfoController.form2Key.currentState!
-                                .validate())) {
-                      print('expert');
-                      registerInfoController.expertRegister(
-                          firstName:
-                              registerInfoController.firstNameController.text,
-                          lastName:
-                              registerInfoController.lastNameController.text,
-                          email: registerController.emailController.text,
-                          password: registerController.passwordController.text,
-                          confirm:
-                              registerController.confirmPasswordController.text,
-                          roleId: 1,
-                          number:
-                              registerInfoController.phoneNumberController.text,
-                          address:
-                              registerInfoController.addressController.text,
-                          days: registerInfoController.days.value,
-                          specialities: <Speciality>[
-                            Speciality(
-                                specialityId: registerInfoController
-                                    .selectedSpecialities.value,
-                                details: registerInfoController
-                                    .detailsController.text)
-                          ]);
-                    }
-                    if ((registerController.isExpert == false) &&
-                            registerInfoController.form1Key.currentState!
-                                .validate() ||
+                    if (registerController.isExpert) {
+                      if (registerInfoController.days.value.isEmpty) {
+                        Get.defaultDialog(
+                            title: "Wrong",
+                            middleText:
+                                "You can't Sign Up Without Select any available Day",
+                            onConfirm: () {
+                              Get.back();
+                            });
+                      } else if (registerInfoController.form1Key.currentState!
+                              .validate() ||
+                          registerInfoController.form3Key.currentState!
+                              .validate() ||
+                          registerInfoController.form2Key.currentState!
+                              .validate()) {
+                        debugPrint('expert');
+                        registerInfoController.expertRegister(
+                            roleId: 3,
+                            firstName:
+                                registerInfoController.firstNameController.text,
+                            lastName:
+                                registerInfoController.lastNameController.text,
+                            email: registerController.emailController.text,
+                            password:
+                                registerController.passwordController.text,
+                            confirm: registerController
+                                .confirmPasswordController.text,
+                            number: registerInfoController
+                                .phoneNumberController.text,
+                            address:
+                                registerInfoController.addressController.text,
+                            days: registerInfoController.days.value,
+                            specialities: <Speciality>[
+                              Speciality(
+                                  specialityId: registerInfoController
+                                      .selectedSpecialities.value,
+                                  details: registerInfoController
+                                      .detailsController.text)
+                            ]);
+                      }
+                    } else if (registerInfoController.form1Key.currentState!
+                            .validate() ||
                         registerInfoController.form3Key.currentState!
                             .validate()) {
-                      print('normal');
+                      debugPrint('normal');
+                      registerInfoController.normalRegister(
+                        roleId: 2,
+                        firstName:
+                            registerInfoController.firstNameController.text,
+                        lastName:
+                            registerInfoController.lastNameController.text,
+                        email: registerController.emailController.text,
+                        password: registerController.passwordController.text,
+                        confirm:
+                            registerController.confirmPasswordController.text,
+                        number:
+                            registerInfoController.phoneNumberController.text,
+                        address:
+                          registerInfoController.addressController.text
+                      );
                     }
                   },
-
                   label: 'Sign Up',
                 )
               ],

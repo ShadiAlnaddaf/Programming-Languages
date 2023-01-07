@@ -1,16 +1,22 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:consulting/controllers/home_controller.dart';
+import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/default_decoration.dart';
-import 'package:consulting/shared/specialist_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import '../../shared/categories_card.dart';
 import '../../shared/default_colors.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({Key? key}) : super(key: key);
+  HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
+    homeController.getSpecialists(
+      isFavorite: homeController.isFavorite,
+        token: CacheHelper.getString('token').toString());
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -70,7 +76,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: TextField(
                   decoration: InputDecoration(
                     prefixIcon: const Icon(
@@ -109,20 +116,29 @@ class HomeScreen extends StatelessWidget {
                 flex: 1,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      buildCategoriesCard(category, index),
-                  itemCount: category.length,
+                  itemBuilder: (context, index) => Obx(() => homeController
+                      .buildCategoriesCard(homeController.category, index)),
+                  itemCount: homeController.category.length,
                 ),
               ),
               Expanded(
-                flex: 3,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) =>
-                      buildSpecialistCard(specialist, index),
-                  itemCount: specialist.length,
-                ),
-              )
+                  flex: 4,
+                  child: Obx(() {
+                    return homeController.isLoading.value
+                        ? const Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) =>
+                                homeController.buildSpecialistCard(
+                                    homeController.specialists,
+                                    index,
+                                    homeController.isFavorite),
+                            itemCount:
+                                homeController.specialists.data.experts.length,
+                          );
+                  }))
             ],
           ),
         ),

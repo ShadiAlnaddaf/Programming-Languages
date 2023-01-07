@@ -20,7 +20,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: <Widget>[
-        const HomeScreen(),
+         HomeScreen(),
         const FavoritesScreen(),
         const SearchScreen(),
         const ProfileScreen(),

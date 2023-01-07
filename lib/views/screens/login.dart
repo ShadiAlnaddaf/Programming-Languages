@@ -1,4 +1,5 @@
 import 'package:consulting/controllers/login_controller.dart';
+import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/default_decoration.dart';
 import 'package:consulting/views/screens/register.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import '../../shared/default_text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-  final LoginController loginController = Get.put(LoginController() , permanent: false);
+  final LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +72,13 @@ class LoginScreen extends StatelessWidget {
                               height: 10,
                             ),
                             DefaultMaterialButton(
-                              onPressed: () {
+                              onPressed: () async {
                                 if (loginController.formKey.currentState!
                                     .validate()) {
                                   loginController.login(
                                       loginController.emailController.text,
                                       loginController.passwordController.text);
+
                                 }
                               },
                               label: 'Login',
@@ -93,7 +95,9 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 TextButton(
                                     onPressed: () {
-                                      Get.off(() => SignUpScreen())!.then((value) => Get.delete<LoginController>());
+                                      Get.off(() => SignUpScreen())!.then(
+                                          (value) =>
+                                              Get.delete<LoginController>());
                                     },
                                     child: const Text('Sign Up',
                                         style: TextStyle(
