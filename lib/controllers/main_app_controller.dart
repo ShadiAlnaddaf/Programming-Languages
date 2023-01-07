@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:consulting/models/available_time_model.dart';
-import 'package:consulting/models/specialist_model.dart';
+import 'package:consulting/models/specialist_model.dart'as sp;
 import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/date_selector.dart';
 import 'package:consulting/shared/default_colors.dart';
@@ -137,8 +137,8 @@ class MainAppController extends GetxController {
         ),
       );
 
-  SpecialistModel specialists =
-  SpecialistModel(message: "", status: "", data: Datas(experts: []));
+  sp.SpecialistModel specialists =
+  sp.SpecialistModel(message: "", status: "", data: sp.Data(experts: []));
 
   Future<void> getSpecialists(
       {required String token, required RxList<RxInt> isFavorite}) async {
@@ -146,7 +146,7 @@ class MainAppController extends GetxController {
       url: 'experts',
       token: token,
     ).then((response) {
-      specialists = SpecialistModel.fromJson(response.data);
+      specialists = sp.SpecialistModel.fromJson(response.data);
       isFavorite.clear();
       for (int i = 0; i < specialists.data.experts.length; i++) {
         isFavorite.add(RxInt(specialists.data.experts[i].favourited));
@@ -159,7 +159,7 @@ class MainAppController extends GetxController {
     });
   }
 
-  Widget buildSpecialistCard(SpecialistModel specialists, int index,
+  Widget buildSpecialistCard(sp.SpecialistModel specialists, int index,
       RxList<RxInt> isFavorite) {
     isFavorite.add(RxInt(specialists.data.experts[index].favourited));
     return Padding(

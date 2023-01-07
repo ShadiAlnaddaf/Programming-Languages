@@ -8,12 +8,12 @@ class SpecialistModel {
 
   String status;
   String message;
-  Datas data;
+  Data data;
 
   factory SpecialistModel.fromJson(Map<String, dynamic> json) => SpecialistModel(
     status: json["status"],
     message: json["message"],
-    data: Datas.fromJson(json["data"]),
+    data: Data.fromJson(json["data"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -23,14 +23,14 @@ class SpecialistModel {
   };
 }
 
-class Datas {
-  Datas({
+class Data {
+  Data({
     required this.experts,
   });
 
   List<Expert> experts;
 
-  factory Datas.fromJson(Map<String, dynamic> json) => Datas(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
     experts: List<Expert>.from(json["experts"].map((x) => Expert.fromJson(x))),
   );
 
