@@ -33,7 +33,7 @@ class LoginController extends GetxController {
     return null;
   }
   sp.SpecialistModel specialists =
-  sp.SpecialistModel(message: "", status: "", data: sp.Data(experts: []));
+  sp.SpecialistModel(message: "", status: "", data: sp.Datas(experts: []));
   void login(String email, String password) {
     DioHelper.postData(
       url: '/login',

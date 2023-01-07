@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:consulting/models/available_time_model.dart';
 import 'package:consulting/models/specialist_model.dart';
 import 'package:consulting/shared/cache_helper.dart';
+import 'package:consulting/shared/date_selector.dart';
 import 'package:consulting/shared/default_colors.dart';
+import 'package:consulting/shared/default_material_button.dart';
 import 'package:consulting/shared/network/dio_exception.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
 import 'package:consulting/views/screens/expert_show.dart';
@@ -19,7 +22,7 @@ class CategoryModel {
 }
 
 class MainAppController extends GetxController {
-  String specialistName (int r){
+  String specialistName(int r) {
     switch (r) {
       case 1:
         return 'Lawyer';
@@ -37,6 +40,7 @@ class MainAppController extends GetxController {
         return 'Null';
     }
   }
+
   List<CategoryModel> category = [
     CategoryModel(
       title: 'All',
@@ -69,8 +73,22 @@ class MainAppController extends GetxController {
         assetPath: 'assets/icons/nutrition.png',
         isSelected: false.obs),
   ];
-  RxBool isLoading = true.obs;
+  RxBool isLoadingExpertList = true.obs;
+  RxBool isLoadingAvailableTime = true.obs;
   RxList<RxInt> isFavorite = <RxInt>[].obs;
+
+  AvailableTimeModel availableTime = AvailableTimeModel(message: "" , status: "" , data: Data(times: []));
+
+  void getAvailableTime(int expertId) async {
+    await DioHelper.getData(
+        url: 'experts/times/$expertId',
+        token: CacheHelper.getString('token').toString()).then((response){
+          availableTime = AvailableTimeModel.fromJson(response.data);
+    }).catchError((e){
+      final error = DioExceptions.fromDioError(e).toString();
+      print(e);
+    });
+  }
 
   void addFavorites({required String token, required int expertId}) =>
       DioHelper.addFavorite(token: token, expertId: expertId)
@@ -114,7 +132,7 @@ class MainAppController extends GetxController {
       );
 
   SpecialistModel specialists =
-      SpecialistModel(message: "", status: "", data: Data(experts: []));
+      SpecialistModel(message: "", status: "", data: Datas(experts: []));
 
   Future<void> getSpecialists(
       {required String token, required RxList<RxInt> isFavorite}) async {
@@ -128,7 +146,7 @@ class MainAppController extends GetxController {
         isFavorite.add(RxInt(specialists.data.experts[i].favourited));
       }
       print('isFavo $isFavorite');
-      isLoading.value = false;
+      isLoadingExpertList.value = false;
     }).catchError((e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       debugPrint(errorMessage);
@@ -173,7 +191,8 @@ class MainAppController extends GetxController {
                     children: [
                       Text(
                           '${specialists.data.experts[index].firstName} ${specialists.data.experts[index].lastName}'),
-                      Text(specialistName(specialists.data.experts[index].specialityId)),
+                      Text(specialistName(
+                          specialists.data.experts[index].specialityId)),
                     ],
                   ),
                 ),
@@ -228,6 +247,33 @@ class MainAppController extends GetxController {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildAvailableTime(List<Time?>? times , int index ,){
+    times?[index]?.day;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+            width: Get.width * 0.25,
+            child: Text(
+              getDayOfWeek(times?[index]?.day??0),
+              textAlign: TextAlign.center,
+            )),
+        SizedBox(
+            width: Get.width * 0.25,
+            child: Text(
+              times?[index]?.start.toString()??"null",
+              textAlign: TextAlign.center,
+            )),
+        SizedBox(
+            width: Get.width * 0.25,
+            child: Text(
+              times?[index]?.end.toString()??"null",
+              textAlign: TextAlign.center,
+            ))
+      ],
     );
   }
 }

@@ -212,7 +212,7 @@ class ContinueSignUpScreen extends StatelessWidget {
                               .validate()) {
                         debugPrint('expert');
                         registerInfoController.expertRegister(
-                            roleId: 3,
+                            roleId: 2,
                             firstName:
                                 registerInfoController.firstNameController.text,
                             lastName:

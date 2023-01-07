@@ -53,7 +53,7 @@ class RegisterInfoController extends GetxController {
   RxString selectedImagePath = ''.obs;
 
   Future<void> expertRegister({
-    File? image,
+    // File? image,
     required String firstName,
     required String lastName,
     required String email,
