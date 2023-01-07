@@ -4,6 +4,7 @@ import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/default_colors.dart';
 import 'package:consulting/shared/network/dio_exception.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
+import 'package:consulting/views/screens/expert_show.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -17,7 +18,25 @@ class CategoryModel {
       {required this.title, required this.assetPath, required this.isSelected});
 }
 
-class HomeController extends GetxController {
+class MainAppController extends GetxController {
+  String specialistName (int r){
+    switch (r) {
+      case 1:
+        return 'Lawyer';
+      case 2:
+        return 'Doctor';
+      case 3:
+        return 'Psychologist';
+      case 4:
+        return 'Business Man';
+      case 5:
+        return 'Family Issues Specialist';
+      case 6:
+        return 'Nutritionist';
+      default:
+        return 'Null';
+    }
+  }
   List<CategoryModel> category = [
     CategoryModel(
       title: 'All',
@@ -35,19 +54,19 @@ class HomeController extends GetxController {
         isSelected: false.obs),
     CategoryModel(
         title: 'Mental Health',
-        assetPath: 'assets/icons/business.png',
+        assetPath: 'assets/icons/mental.png',
         isSelected: false.obs),
     CategoryModel(
         title: 'Business',
-        assetPath: 'assets/icons/family.png',
+        assetPath: 'assets/icons/business.png',
         isSelected: false.obs),
     CategoryModel(
         title: 'Family',
-        assetPath: 'assets/icons/mental.png',
+        assetPath: 'assets/icons/family.png',
         isSelected: false.obs),
     CategoryModel(
         title: 'Nutrition',
-        assetPath: 'assets/icons/mental.png',
+        assetPath: 'assets/icons/nutrition.png',
         isSelected: false.obs),
   ];
   RxBool isLoading = true.obs;
@@ -130,7 +149,11 @@ class HomeController extends GetxController {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(25),
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(ExpertInfoScreen(
+                thisExpert: specialists.data.experts[index],
+              ));
+            },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -150,7 +173,7 @@ class HomeController extends GetxController {
                     children: [
                       Text(
                           '${specialists.data.experts[index].firstName} ${specialists.data.experts[index].lastName}'),
-                      Text(specialists.data.experts[index].email),
+                      Text(specialistName(specialists.data.experts[index].specialityId)),
                     ],
                   ),
                 ),
@@ -165,10 +188,13 @@ class HomeController extends GetxController {
                   itemSize: 25.0,
                   direction: Axis.horizontal,
                 ),
-                Text(
-                  specialists.data.experts[index].address,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 7),
+                  child: Text(
+                    specialists.data.experts[index].details,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  ),
                 ),
                 const Spacer(),
                 Obx(

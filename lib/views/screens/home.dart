@@ -1,6 +1,7 @@
+
 // ignore_for_file: must_be_immutable
 
-import 'package:consulting/controllers/home_controller.dart';
+import 'package:consulting/controllers/main_app_controller.dart';
 import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/default_decoration.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import '../../shared/default_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  HomeController homeController = Get.put(HomeController());
+  MainAppController homeController = Get.put(MainAppController() , permanent: true);
 
   @override
   Widget build(BuildContext context) {

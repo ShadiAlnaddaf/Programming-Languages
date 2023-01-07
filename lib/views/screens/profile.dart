@@ -2,7 +2,6 @@ import 'package:consulting/views/screens/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
 import '../../shared/default_colors.dart';
 import '../../shared/default_decoration.dart';
 import '../../shared/list_tile.dart';

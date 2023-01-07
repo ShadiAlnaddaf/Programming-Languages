@@ -1,7 +1,10 @@
+import 'package:consulting/middleware/auth_middleware.dart';
 import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
 import 'package:consulting/views/screens/login.dart';
 import 'package:consulting/views/screens/main_app.dart';
+import 'package:consulting/views/screens/register.dart';
+import 'package:consulting/views/screens/register_info.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,9 +23,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return    GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
       getPages: [
-        GetPage(name: '/', page: ()=>LoginScreen()),
+        GetPage(name: '/', page: ()=>LoginScreen() , middlewares:[AuthMiddleware()]),
+        GetPage(name: '/Register', page: ()=>SignUpScreen()),
+        GetPage(name: '/RegisterInfo', page: ()=>ContinueSignUpScreen()),
+        GetPage(name: '/App', page: ()=>const MainAppScreen()),
+
       ],
     );
   }

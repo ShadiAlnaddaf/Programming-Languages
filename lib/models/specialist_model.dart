@@ -52,6 +52,8 @@ class Expert {
     required this.walletId,
     this.averageRate='0.0',
     this.favourited=0,
+    required this.specialityId,
+    required this.details,
   });
 
   int id;
@@ -65,7 +67,8 @@ class Expert {
   int walletId;
   String averageRate;
   int favourited;
-
+  int specialityId;
+  String details;
   factory Expert.fromJson(Map<String, dynamic> json) => Expert(
     id: json["id"],
     firstName: json["firstName"],
@@ -78,6 +81,8 @@ class Expert {
     walletId: json["wallet_id"],
     averageRate: json["average_rate"] ?? "0.0",
     favourited: json["favourited"]?? 0,
+    specialityId: json["speciality_id"],
+    details: json["details"],
   );
 
   Map<String, dynamic> toJson() => {

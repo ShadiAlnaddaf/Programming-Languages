@@ -1,3 +1,4 @@
+import 'package:consulting/controllers/main_app_controller.dart';
 import 'package:consulting/views/screens/favorit.dart';
 import 'package:consulting/views/screens/home.dart';
 import 'package:consulting/views/screens/profile.dart';
@@ -5,6 +6,7 @@ import 'package:consulting/views/screens/search.dart';
 import 'package:consulting/views/screens/setting.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MainAppScreen extends StatefulWidget {
   const MainAppScreen({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class MainAppScreen extends StatefulWidget {
 }
 
 class _MainAppScreenState extends State<MainAppScreen> {
+  MainAppController homeController = Get.put(MainAppController() , permanent: true);
   int currentPageIndex = 0;
 
   @override

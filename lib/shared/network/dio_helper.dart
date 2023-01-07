@@ -10,7 +10,7 @@ class DioHelper {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        baseUrl: 'http://192.168.1.12/api/',
+        baseUrl: 'http://192.168.1.109/api/',
         receiveDataWhenStatusError: true,
       ),
     );
