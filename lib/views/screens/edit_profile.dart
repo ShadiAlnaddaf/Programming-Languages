@@ -103,7 +103,6 @@ class _EditProfileScreen extends State<EditProfileScreen> {
         Get.snackbar('Warning', 'No Image Selected');
       }
     }
-
     Widget bottomSheet() {
       return Container(
         height: 100,
@@ -143,7 +142,6 @@ class _EditProfileScreen extends State<EditProfileScreen> {
         ),
       );
     }
-
     Widget imageProfile() {
       return Center(
         child: Stack(

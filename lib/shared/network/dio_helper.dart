@@ -1,3 +1,4 @@
+import 'package:consulting/shared/cache_helper.dart';
 import 'package:dio/dio.dart' as dio;
 
 class DioHelper {
@@ -51,5 +52,11 @@ class DioHelper {
   }) async {
     _dio.options.headers["Authorization"] = "Bearer $token";
     return await _dio.delete('favourites/$expertId');
+  }
+  static Future<dio.Response> search({
+    required Map<String , String>data
+})async{
+    _dio.options.headers["Authorization"] = "Bearer ${CacheHelper.getString('token')}";
+    return await _dio.post('experts/',data: data );
   }
 }

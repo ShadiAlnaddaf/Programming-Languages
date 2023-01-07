@@ -25,7 +25,7 @@ class _MainAppScreenState extends State<MainAppScreen> {
       body: <Widget>[
          HomeScreen(),
         const FavoritesScreen(),
-        const SearchScreen(),
+         SearchScreen(),
         const ProfileScreen(),
         const SettingScreen()
       ][currentPageIndex],
