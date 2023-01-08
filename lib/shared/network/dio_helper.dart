@@ -11,7 +11,7 @@ class DioHelper {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        baseUrl: 'http://192.168.1.38/api/',
+        baseUrl: 'http://192.168.199.124/api/',
         receiveDataWhenStatusError: true,
       ),
     );
@@ -21,7 +21,11 @@ class DioHelper {
     required String url,
     required Map<String, dynamic> data,
     Map<String, dynamic>? query,
+    String? token
   }) async {
+    if(token!=null){
+      _dio.options.headers["Authorization"] = "Bearer $token";
+    }
     return await _dio.post(
       url,
       data: data,
