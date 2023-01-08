@@ -3,10 +3,8 @@ import 'package:consulting/controllers/main_app_controller.dart';
 import 'package:consulting/models/specialist_model.dart';
 import 'package:consulting/shared/default_colors.dart';
 import 'package:consulting/shared/default_material_button.dart';
-import 'package:consulting/shared/network/dio_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:consulting/shared/default_decoration.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 // ignore: must_be_immutable
@@ -34,7 +32,7 @@ class ExpertInfoScreen extends StatelessWidget {
                               .image ==
                           ''
                       ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
-                      : thisExpert.image.toString())),
+                      : thisExpert.image)),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20, bottom: 10),
@@ -102,24 +100,6 @@ class ExpertInfoScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(padding: const EdgeInsets.symmetric(vertical: 10) , child: Center(
-              child: RatingBar.builder(
-                itemSize: 30,
-                minRating: 1,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemCount: 5,
-                itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
-                itemBuilder: (context, _) =>
-                const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-                onRatingUpdate: (rating){
-                expertShowController.rate(thisExpert.id, rating);
-                },
-              ),
-            ),),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
