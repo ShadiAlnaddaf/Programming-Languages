@@ -36,60 +36,60 @@ class _EditProfileScreen extends State<EditProfileScreen> {
 
     String? firstNameValidator(String? value) {
       if (value == null || value.isEmpty) {
-        return '33'.tr;
+        return 'Enter your first name!';
       }
       return null;
     }
 
     String? lastNameValidator(String? value) {
       if (value == null || value.isEmpty) {
-        return '34'.tr;
+        return 'Enter your Last Name!';
       }
       return null;
     }
 
     String? phoneNumberValidator(String? value) {
       if (value == null || value.isEmpty) {
-        return '10'.tr;
+        return 'Enter your phone number!';
       }
       return null;
     }
 
     String? detailsValidator(String? value) {
       if (value == null || value.isEmpty) {
-        return '35'.tr;
+        return 'Enter your Details!';
       }
       return null;
     }
 
     String? addressValidator(String? value) {
       if (value == null || value.isEmpty) {
-        return '36'.tr;
+        return 'Enter your Address';
       }
       return null;
     }
 
     String? passwordValidator(String? value) {
       if (value == null || value.isEmpty) {
-        return '10'.tr;
+        return 'Enter Password';
       } else if (value.length < 8 || value.length > 20) {
-        return '7'.tr;
+        return 'Password Must be between 8 & 20 Character';
       }
       return null;
     }
 
     String? confirmPasswordValidator(String? value) {
       if (value == null || value.isEmpty) {
-        return '17'.tr;
+        return 'Confirm Password Must Not be Empty!';
       } else if (passwordController.text != value) {
-        return "16".tr;
+        return "Password doesn't Match";
       }
       return null;
     }
 
     String? emailValidator(String? value) {
       if (value == null || value.isEmpty) {
-        return '6'.tr;
+        return 'Enter Email';
       }
       return null;
     }
@@ -100,10 +100,9 @@ class _EditProfileScreen extends State<EditProfileScreen> {
       if (selectedItem != null) {
         selectedImagePath.value = selectedItem.path;
       } else {
-        Get.snackbar('37'.tr, '38'.tr);
+        Get.snackbar('Warning', 'No Image Selected');
       }
     }
-
     Widget bottomSheet() {
       return Container(
         height: 100,
@@ -114,8 +113,8 @@ class _EditProfileScreen extends State<EditProfileScreen> {
         ),
         child: Column(
           children: <Widget>[
-            Text(
-              "46".tr,
+            const Text(
+              "Choose Profile photo",
               style: TextStyle(fontSize: 20),
             ),
             const SizedBox(
@@ -129,21 +128,20 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                       selectImage(ImageSource.camera);
                     },
                     icon: const Icon(LineAwesomeIcons.camera),
-                    label: Text("47".tr)),
+                    label: const Text("Camera")),
                 const SizedBox(width: 50),
                 ElevatedButton.icon(
                     onPressed: () {
                       selectImage(ImageSource.gallery);
                     },
                     icon: const Icon(LineAwesomeIcons.envira_gallery),
-                    label: Text("48".tr)),
+                    label: const Text("Gallery")),
               ],
             )
           ],
         ),
       );
     }
-
     Widget imageProfile() {
       return Center(
         child: Stack(
@@ -201,9 +199,9 @@ class _EditProfileScreen extends State<EditProfileScreen> {
           ),
         ),
         centerTitle: true,
-        title: Text(
-          '49'.tr,
-          style: const TextStyle(
+        title: const Text(
+          'Edit Profile',
+          style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Color(0XFF1B4965),
@@ -225,7 +223,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
               child: Column(
                 children: [
                   DefaultTextFormField(
-                    hintText: '18'.tr,
+                    hintText: 'First Name',
                     controller: firstNameController,
                     keyboardType: TextInputType.name,
                     prefixIcon: Icons.perm_identity,
@@ -235,7 +233,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                     height: 10,
                   ),
                   DefaultTextFormField(
-                    hintText: '19'.tr,
+                    hintText: 'Last Name',
                     controller: lastNameController,
                     keyboardType: TextInputType.name,
                     prefixIcon: Icons.perm_identity,
@@ -246,7 +244,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                   ),
                   DefaultTextFormField(
                     controller: emailController,
-                    hintText: '1'.tr,
+                    hintText: 'Email',
                     keyboardType: TextInputType.emailAddress,
                     prefixIcon: LineAwesomeIcons.at,
                     validator: emailValidator,
@@ -256,7 +254,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                   ),
                   DefaultTextFormField(
                     controller: passwordController,
-                    hintText: '2'.tr,
+                    hintText: 'Password',
                     keyboardType: TextInputType.visiblePassword,
                     prefixIcon: LineAwesomeIcons.lock,
                     suffixIcon: IconButton(
@@ -278,7 +276,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                   ),
                   DefaultTextFormField(
                     controller: confirmPasswordController,
-                    hintText: '11'.tr,
+                    hintText: 'Confirm Password',
                     keyboardType: TextInputType.visiblePassword,
                     prefixIcon: LineAwesomeIcons.lock,
                     obscureText: passwordVisibility.value,
@@ -289,7 +287,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                     height: 10,
                   ),
                   DefaultTextFormField(
-                    hintText: '20'.tr,
+                    hintText: 'Phone Number',
                     controller: phoneNumberController,
                     keyboardType: TextInputType.number,
                     validator: phoneNumberValidator,
@@ -299,7 +297,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                     height: 10,
                   ),
                   DefaultTextFormField(
-                    hintText: '23'.tr,
+                    hintText: 'Details about you',
                     controller: detailsController,
                     keyboardType: TextInputType.text,
                     validator: detailsValidator,
@@ -309,7 +307,7 @@ class _EditProfileScreen extends State<EditProfileScreen> {
                     height: 10,
                   ),
                   DefaultTextFormField(
-                    hintText: '21'.tr,
+                    hintText: 'Address',
                     controller: addressController,
                     keyboardType: TextInputType.text,
                     validator: addressValidator,

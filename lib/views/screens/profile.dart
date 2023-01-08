@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
 import '../../shared/default_colors.dart';
 import '../../shared/default_decoration.dart';
 import 'edit_profile.dart';
@@ -36,9 +35,9 @@ class _ProfileScreen extends State<ProfileScreen> {
           ),
         ),
         centerTitle: true,
-        title: Text(
-          '42'.tr,
-          style: const TextStyle(
+        title: const Text(
+          'Profile',
+          style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Color(0XFF1B4965),
@@ -86,9 +85,9 @@ class _ProfileScreen extends State<ProfileScreen> {
                 color: DefaultColors.c3.withOpacity(0.8),
                 shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0))),
-                child: Text(
-                  '49'.tr,
-                  style: const TextStyle(
+                child: const Text(
+                  'Edit Profile',
+                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w300,
                     color: Colors.white,

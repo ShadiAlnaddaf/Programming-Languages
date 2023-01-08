@@ -16,17 +16,16 @@ class MainAppScreen extends StatefulWidget {
 }
 
 class _MainAppScreenState extends State<MainAppScreen> {
-  MainAppController homeController =
-      Get.put(MainAppController(), permanent: true);
+  MainAppController homeController = Get.put(MainAppController() , permanent: true);
   int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: <Widget>[
-        HomeScreen(),
+         HomeScreen(),
         const FavoritesScreen(),
-        SearchScreen(),
+         SearchScreen(),
         const ProfileScreen(),
         const SettingScreen()
       ][currentPageIndex],
@@ -37,30 +36,30 @@ class _MainAppScreenState extends State<MainAppScreen> {
           });
         },
         selectedIndex: currentPageIndex,
-        destinations: <Widget>[
+        destinations: const <Widget>[
           NavigationDestination(
             icon: Icon(CupertinoIcons.house),
             selectedIcon: Icon(CupertinoIcons.house_fill),
-            label: '39'.tr,
+            label: 'Home',
           ),
           NavigationDestination(
             icon: Icon(CupertinoIcons.heart),
             selectedIcon: Icon(CupertinoIcons.heart_fill),
-            label: '40'.tr,
+            label: 'Favorites',
           ),
           NavigationDestination(
             selectedIcon: Icon(CupertinoIcons.search_circle_fill),
             icon: Icon(CupertinoIcons.search),
-            label: '41'.tr,
+            label: 'Search',
           ),
           NavigationDestination(
             selectedIcon: Icon(CupertinoIcons.person_circle_fill),
             icon: Icon(CupertinoIcons.person_circle),
-            label: '42'.tr,
+            label: 'Profile',
           ),
           NavigationDestination(
             icon: Icon(CupertinoIcons.settings),
-            label: '43'.tr,
+            label: 'Settings',
           ),
         ],
       ),
