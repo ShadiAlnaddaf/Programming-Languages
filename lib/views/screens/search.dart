@@ -19,10 +19,9 @@ class SearchScreen extends StatelessWidget {
           child: Column(
             children: [
               DefaultTextFormField(
-                hintText: 'Search By Name',
+                hintText: '64'.tr,
                 controller: searchController.searchBarController,
                 keyboardType: TextInputType.name,
-
               )
             ],
           ),

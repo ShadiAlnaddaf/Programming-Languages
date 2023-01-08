@@ -1,4 +1,5 @@
 import 'package:consulting/controllers/register_controller.dart';
+import 'package:consulting/locale/locale_controller.dart';
 import 'package:consulting/shared/default_decoration.dart';
 import 'package:consulting/views/screens/login.dart';
 import 'package:consulting/views/screens/register_info.dart';
@@ -16,6 +17,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MyLocaleController controller = Get.find();
     return SafeArea(
       child: Scaffold(
         body: Container(

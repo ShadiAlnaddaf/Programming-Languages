@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:consulting/models/available_time_model.dart';
-import 'package:consulting/models/specialist_model.dart'as sp;
+import 'package:consulting/models/specialist_model.dart' as sp;
 import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/date_selector.dart';
 import 'package:consulting/shared/default_colors.dart';
-import 'package:consulting/shared/default_material_button.dart';
 import 'package:consulting/shared/network/dio_exception.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
 import 'package:consulting/views/screens/expert_show.dart';
@@ -25,56 +24,53 @@ class MainAppController extends GetxController {
   String specialistName(int r) {
     switch (r) {
       case 1:
-        return 'Lawyer';
+        return '51'.tr;
       case 2:
-        return 'Doctor';
+        return '52'.tr;
       case 3:
-        return 'Psychologist';
+        return '53'.tr;
       case 4:
-        return 'Business Man';
+        return '54'.tr;
       case 5:
-        return 'Family Issues Specialist';
+        return '55'.tr;
       case 6:
-        return 'Nutritionist';
+        return '56'.tr;
       default:
-        return 'Null';
+        return '57'.tr;
     }
   }
 
-
   TextEditingController searchBarController = TextEditingController();
-
-
 
   List<CategoryModel> category = [
     CategoryModel(
-      title: 'All',
+      title: '58'.tr,
       assetPath: 'assets/icons/all.png',
       isSelected: false.obs,
     ),
     CategoryModel(
-      title: 'Law',
+      title: '26'.tr,
       assetPath: 'assets/icons/law.png',
       isSelected: false.obs,
     ),
     CategoryModel(
-        title: 'Medical',
+        title: '27'.tr,
         assetPath: 'assets/icons/health.png',
         isSelected: false.obs),
     CategoryModel(
-        title: 'Mental Health',
+        title: '28'.tr,
         assetPath: 'assets/icons/mental.png',
         isSelected: false.obs),
     CategoryModel(
-        title: 'Business',
+        title: '29'.tr,
         assetPath: 'assets/icons/business.png',
         isSelected: false.obs),
     CategoryModel(
-        title: 'Family',
+        title: '30'.tr,
         assetPath: 'assets/icons/family.png',
         isSelected: false.obs),
     CategoryModel(
-        title: 'Nutrition',
+        title: '31'.tr,
         assetPath: 'assets/icons/nutrition.png',
         isSelected: false.obs),
   ];
@@ -82,13 +78,14 @@ class MainAppController extends GetxController {
   RxBool isLoadingAvailableTime = true.obs;
   RxList<RxInt> isFavorite = <RxInt>[].obs;
 
-  AvailableTimeModel availableTime = AvailableTimeModel(
-      message: "", status: "", data: Data(times: []));
+  AvailableTimeModel availableTime =
+      AvailableTimeModel(message: "", status: "", data: Data(times: []));
 
   void getAvailableTime(int expertId) async {
     await DioHelper.getData(
-        url: 'experts/times/$expertId',
-        token: CacheHelper.getString('token').toString()).then((response) {
+            url: 'experts/times/$expertId',
+            token: CacheHelper.getString('token').toString())
+        .then((response) {
       availableTime = AvailableTimeModel.fromJson(response.data);
     }).catchError((e) {
       final error = DioExceptions.fromDioError(e).toString();
@@ -118,7 +115,7 @@ class MainAppController extends GetxController {
           category[index].isSelected.value = !category[index].isSelected.value;
         },
         color:
-        category[index].isSelected.value ? DefaultColors.c1 : Colors.white,
+            category[index].isSelected.value ? DefaultColors.c1 : Colors.white,
         child: Column(
           children: [
             Image.asset(
@@ -138,7 +135,7 @@ class MainAppController extends GetxController {
       );
 
   sp.SpecialistModel specialists =
-  sp.SpecialistModel(message: "", status: "", data: sp.Data(experts: []));
+      sp.SpecialistModel(message: "", status: "", data: sp.Data(experts: []));
 
   Future<void> getSpecialists(
       {required String token, required RxList<RxInt> isFavorite}) async {
@@ -159,8 +156,8 @@ class MainAppController extends GetxController {
     });
   }
 
-  Widget buildSpecialistCard(sp.SpecialistModel specialists, int index,
-      RxList<RxInt> isFavorite) {
+  Widget buildSpecialistCard(
+      sp.SpecialistModel specialists, int index, RxList<RxInt> isFavorite) {
     isFavorite.add(RxInt(specialists.data.experts[index].favourited));
     return Padding(
       padding: const EdgeInsets.only(left: 7, top: 10, bottom: 10),
@@ -186,8 +183,8 @@ class MainAppController extends GetxController {
                   child: CircleAvatar(
                       radius: 50,
                       backgroundImage: CachedNetworkImageProvider(specialists
-                          .data.experts[index].image ==
-                          ''
+                                  .data.experts[index].image ==
+                              ''
                           ? 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
                           : specialists.data.experts[index].image)),
                 ),
@@ -196,9 +193,7 @@ class MainAppController extends GetxController {
                   child: Column(
                     children: [
                       Text(
-                          '${specialists.data.experts[index]
-                              .firstName} ${specialists.data.experts[index]
-                              .lastName}'),
+                          '${specialists.data.experts[index].firstName} ${specialists.data.experts[index].lastName}'),
                       Text(specialistName(
                           specialists.data.experts[index].specialityId)),
                     ],
@@ -206,9 +201,8 @@ class MainAppController extends GetxController {
                 ),
                 RatingBarIndicator(
                   rating:
-                  double.parse(specialists.data.experts[index].averageRate),
-                  itemBuilder: (context, index) =>
-                  const Icon(
+                      double.parse(specialists.data.experts[index].averageRate),
+                  itemBuilder: (context, index) => const Icon(
                     Icons.star,
                     color: Colors.amber,
                   ),
@@ -226,31 +220,30 @@ class MainAppController extends GetxController {
                 ),
                 const Spacer(),
                 Obx(
-                      () =>
-                      IconButton(
-                        onPressed: () {
-                          isFavorite[index].value == 1
-                              ? isFavorite[index].value = 0
-                              : isFavorite[index].value = 1;
-                          isFavorite[index].value == 1
-                              ? addFavorites(
+                  () => IconButton(
+                    onPressed: () {
+                      isFavorite[index].value == 1
+                          ? isFavorite[index].value = 0
+                          : isFavorite[index].value = 1;
+                      isFavorite[index].value == 1
+                          ? addFavorites(
                               token: CacheHelper.getString('token').toString(),
                               expertId: specialists.data.experts[index].id)
-                              : deleteFavorites(
+                          : deleteFavorites(
                               token: CacheHelper.getString('token').toString(),
                               expertId: specialists.data.experts[index].id);
-                        },
-                        icon: isFavorite[index].value == 1
-                            ? const Icon(
-                          Icons.favorite,
-                          color: Colors.red,
-                          size: 35,
-                        )
-                            : const Icon(
-                          Icons.favorite_border_outlined,
-                          size: 35,
-                        ),
-                      ),
+                    },
+                    icon: isFavorite[index].value == 1
+                        ? const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            size: 35,
+                          )
+                        : const Icon(
+                            Icons.favorite_border_outlined,
+                            size: 35,
+                          ),
+                  ),
                 ),
               ],
             ),
@@ -260,7 +253,10 @@ class MainAppController extends GetxController {
     );
   }
 
-  Widget buildAvailableTime(List<Time?>? times, int index,) {
+  Widget buildAvailableTime(
+    List<Time?>? times,
+    int index,
+  ) {
     times?[index]?.day;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

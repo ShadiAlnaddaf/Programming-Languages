@@ -1,4 +1,3 @@
-
 // ignore_for_file: must_be_immutable
 
 import 'package:consulting/controllers/main_app_controller.dart';
@@ -7,11 +6,13 @@ import 'package:consulting/shared/default_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
 import '../../shared/default_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  MainAppController homeController = Get.put(MainAppController() , permanent: true);
+  MainAppController homeController =
+      Get.put(MainAppController(), permanent: true);
 
   @override
   Widget build(BuildContext context) {
@@ -49,26 +50,26 @@ class HomeScreen extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
-                              'How Are You',
-                              style: TextStyle(
+                              '59'.tr,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 15),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Find Every Advice You Want',
-                              style: TextStyle(
+                              '60'.tr,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 15),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
-                              'Keep Looking',
-                              style: TextStyle(
+                              '61'.tr,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                           ],
@@ -87,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                       Icons.search,
                       color: DefaultColors.c2,
                     ),
-                    hintText: 'Find Your Advice',
+                    hintText: '62'.tr,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),

@@ -2,7 +2,6 @@ import 'package:consulting/locale/locale_controller.dart';
 import 'package:consulting/middleware/auth_middleware.dart';
 import 'package:consulting/shared/cache_helper.dart';
 import 'package:consulting/shared/network/dio_helper.dart';
-import 'package:consulting/views/screens/login.dart';
 import 'package:consulting/views/screens/main_app.dart';
 import 'package:consulting/views/screens/register.dart';
 import 'package:consulting/views/screens/register_info.dart';
@@ -25,15 +24,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MyLocaleController());
+    MyLocaleController controller = Get.put(MyLocaleController());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      locale: Get.deviceLocale,
       translations: MyLocale(),
       getPages: [
         GetPage(
             name: '/',
-            page: () => LoginScreen(),
+            page: () => MainAppScreen(),
             middlewares: [AuthMiddleware()]),
         GetPage(name: '/Register', page: () => SignUpScreen()),
         GetPage(name: '/RegisterInfo', page: () => ContinueSignUpScreen()),
