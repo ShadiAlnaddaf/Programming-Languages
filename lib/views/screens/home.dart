@@ -1,3 +1,4 @@
+
 // ignore_for_file: must_be_immutable
 
 import 'package:consulting/controllers/main_app_controller.dart';
@@ -10,8 +11,7 @@ import '../../shared/default_colors.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
-  MainAppController homeController =
-      Get.find();
+  MainAppController homeController = Get.put(MainAppController() , permanent: true);
 
   @override
   Widget build(BuildContext context) {
@@ -138,8 +138,8 @@ class HomeScreen extends StatelessWidget {
                                     homeController.specialists,
                                     index,
                                     homeController.isFavorite),
-                            itemCount: homeController
-                                .specialists.data!.experts!.length,
+                            itemCount:
+                                homeController.specialists.data.experts.length,
                           );
                   }))
             ],
