@@ -22,7 +22,6 @@ class SpecialistModel {
     "data": data.toJson(),
   };
 }
-
 class Data {
   Data({
     required this.experts,
@@ -38,7 +37,6 @@ class Data {
     "experts": List<dynamic>.from(experts.map((x) => x.toJson())),
   };
 }
-
 class Expert {
   Expert({
     required this.id,
@@ -46,7 +44,7 @@ class Expert {
     required this.lastName,
     required this.email,
     required this.number,
-     this.image = '',
+    this.image = '',
     required this.address,
     required this.roleId,
     required this.walletId,
@@ -82,7 +80,7 @@ class Expert {
     averageRate: json["average_rate"] ?? "0.0",
     favourited: json["favourited"]?? 0,
     specialityId: json["speciality_id"],
-    details: json["details"],
+    details: json["details"]??"Null",
   );
 
   Map<String, dynamic> toJson() => {
